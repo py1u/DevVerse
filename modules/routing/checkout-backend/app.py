@@ -70,6 +70,7 @@ def add_product_to_cart():
         "name": product.get("name"),
         "price": product.get("price"),
     }
+    
     if not item:
         return json.dumps({"success": False, "data": "item not found!"}), 404
     cart[cart_item_count] = item
@@ -90,7 +91,6 @@ def delete_cart_product():
         "id": product_id,
         "name": product.get("name"),
         "price": product.get("price"),
-        "quantity": product.get("quantity")
     }
     
     if not item:
