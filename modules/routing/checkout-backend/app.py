@@ -129,6 +129,28 @@ def add_product_to_cart():
     cart_item_count += 1 
     print(cart_item_count)
     return json.dumps({"success": True, "data": item}), 201
-          
+
+@app.route("/cart/", methods=["DELETE"])
+def delete_cart_product():
+    body = json.loads(request.data)
+    product_id = body.get("id")
+    product = products.get(product_id)
+    
+    if not product:
+        return json.dumps({"success": False, "error": "Product not found!"}), 404
+    
+    item = {
+        "id": product_id,
+        "name": product.get("name"),
+        "price": product.get("price"),
+        "quantity": product.get("quantity")
+    }
+    
+    if not item:
+        return json.dumps({"sucess": False, "data": "item not found!"}), 404
+    
+    del cart[product_id] 
+    return json.dumps({"success": True, "data": item}),200  
+     
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
