@@ -33,6 +33,13 @@ cart_item_count = 0
 @app.route("/")
 def hello():
     return "Hello, World!"
-    
+
+@app.route("/products/")
+def get_products():
+    data = list(products.values())
+    if not data:
+        return json.dumps({"success": False, "error": "Products not found!"}), 404
+    return json.dumps({"success": True, "data": data}), 200
+   
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
