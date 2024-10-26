@@ -1,0 +1,26 @@
+Flask application:
+
+project_root/
+├── app/
+│   ├── __init__.py            # Initialize the Flask app
+│   ├── config.py              # Configuration settings
+│   ├── models/                # SQLAlchemy
+│   │   ├── __init__.py
+│   │   └── user.py
+│   ├── routes/                # App endpoints
+│   │   ├── __init__.py
+│   │   └── auth.py
+│   ├── services/              # Service functions
+│   │   ├── __init__.py
+│   │   └── auth_service.py
+│   ├── utils/                 # Utility functions 
+│   │   └── helpers.py
+│   ├── templates/             # HTML templates 
+│   ├── static/                # Static files 
+│   └── main.py                # Main entry point for running the app
+├── tests/                     # run tests
+│   └── test_auth.py
+├── migrations/                # Database migrations
+├── requirements.txt           # Python dependencies
+├── .env                       # Environment variables
+└── README.md                  
