@@ -40,6 +40,13 @@ def get_products():
     if not data:
         return json.dumps({"success": False, "error": "Products not found!"}), 404
     return json.dumps({"success": True, "data": data}), 200
-   
+
+@app.route("/products/<int:product_id>/")
+def get_product_by_id(product_id):
+    product = products.get(product_id)
+    if not product:
+        return json.dumps({"success": False, "error": "Product not found!"})
+    return json.dumps({"success": True, "data": product})
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
