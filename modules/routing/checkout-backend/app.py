@@ -95,7 +95,8 @@ def delete_cart_product():
     
     if not item:
         return json.dumps({"sucess": False, "data": "item not found!"}), 404
-    
+    print(cart)
+    # TODO: change product_id to compare actual product id key value not the cart key
     del cart[product_id] 
     return json.dumps({"success": True, "data": item}),200    
      
