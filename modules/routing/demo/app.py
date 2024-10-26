@@ -54,5 +54,16 @@ def get_task(task_id):
         return json.dumps({"success": False, "error": "Task not found!"}), 404
     return json.dumps({"success": True, "data": task }), 200
 
+
+@app.route("/tasks/<int:task_id>/", methods=["POST"])
+def update_task(task_id):
+    task = tasks.get(task_id)
+    if not task:
+        return json.dumps({"success": False, "error": "task not found!"}), 404
+    body = json.loads(request.data)
+    task["description"] = body.get("description")
+    task["done"] = body.get("done")
+    return json.dumps({"success": True, "data": task}), 200
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
