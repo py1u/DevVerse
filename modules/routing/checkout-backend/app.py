@@ -60,6 +60,7 @@ def add_product_to_cart():
     global cart_item_count
     body = json.loads(request.data)
     product_id = body.get("id")
+    quantity = body.get("quantity", 1)
     product = products.get(product_id)
     
     if not product:
@@ -69,6 +70,7 @@ def add_product_to_cart():
         "id": product_id,
         "name": product.get("name"),
         "price": product.get("price"),
+        "quantity": quantity
     }
     
     if not item:
