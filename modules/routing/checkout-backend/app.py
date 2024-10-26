@@ -69,7 +69,6 @@ def add_product_to_cart():
         "id": product_id,
         "name": product.get("name"),
         "price": product.get("price"),
-        "quantity": product.get("quantity")
     }
     if not item:
         return json.dumps({"success": False, "data": "item not found!"}), 404
