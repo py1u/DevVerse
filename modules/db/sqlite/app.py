@@ -16,7 +16,7 @@ def failure_res(message, code=404):
 def get_tasks():
     return success_res(DB.get_all_tasks())
 
-@app.route("tasks/", methods=["POST"])
+@app.route("/tasks/", methods=["POST"])
 def create_task():
     body = json.loads(request.data)
     description = body.get("description")
