@@ -1,4 +1,6 @@
 from flask import Flask
+import json
+import db 
 
 app = Flask("__name__")
 
