@@ -27,5 +27,12 @@ def create_task():
         return success_res(task, 201)
     return failure_res("something went wrong while creating task!")
 
+@app.route("/tasks/<int:task_id>")
+def get_task(task_id):
+    task = DB.get_task_by_id(task_id)
+    if task is not None:
+        return success_res(task)
+    return failure_res("Task not found!")
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
