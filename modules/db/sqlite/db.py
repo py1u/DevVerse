@@ -60,4 +60,11 @@ class DatabaseDriver(object):
             print(err)
             return None
 
+    def get_task_by_id(self, id):
+        cursor = self.conn.execute("SELECT * FROM task WHERE ID = ?;", (id,))
+        for row in cursor:
+            return {"id": row[0], "description": row[1], "done": bool(row[2]) }
+        
+        return None
+    
 DatabaseDriver = singleton(DatabaseDriver)
