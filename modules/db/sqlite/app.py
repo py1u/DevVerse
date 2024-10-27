@@ -34,7 +34,7 @@ def get_task(task_id):
         return success_res(task)
     return failure_res("Task not found!")
 
-@app.route("tasks/<int:task_id>", methods=["POST"])
+@app.route("/tasks/<int:task_id>/", methods=["POST"])
 def update_task(task_id):
     body = json.loads(request.data)
     description = body.get("description")
