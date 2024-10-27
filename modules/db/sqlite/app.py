@@ -14,7 +14,7 @@ def failure_res(message, code=404):
 
 @app.route("/tasks/")
 def get_tasks():
-    pass
+    return sucess_res(DB.get_all_tasks())
 
 @app.route("tasks/", methods=["POST"])
 def create_task():
