@@ -67,4 +67,16 @@ class DatabaseDriver(object):
         
         return None
     
+    def update_task_by_id(self,description, done, id):
+        self.conn.execute(
+                    """
+                    UPDATE task 
+                    SET description = ?, done = ? 
+                    WHERE ID = ?;
+                    """, 
+                    (description, done, id),
+        )
+
+        self.conn.commit()
+        
 DatabaseDriver = singleton(DatabaseDriver)
