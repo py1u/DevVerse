@@ -67,7 +67,7 @@ class DatabaseDriver(object):
         
         return None
     
-    def update_task_by_id(self,description, done, id):
+    def update_task_by_id(self,id, description, done):
         self.conn.execute(
                     """
                     UPDATE task 
