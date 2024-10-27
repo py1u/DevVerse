@@ -7,6 +7,12 @@ def hello():
     return "Hello World!"
 
 
+def sucess_res(data, code=200):
+    pass
+
+def failure_res(message, code=404):
+    pass
+
 @app.route("/tasks/")
 def get_tasks():
     pass
