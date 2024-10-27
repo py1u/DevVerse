@@ -79,4 +79,13 @@ class DatabaseDriver(object):
 
         self.conn.commit()
         
+    def delete_task_by_id(self, id):
+        self.conn.execute(
+            """
+                DELETE FROM task
+                WHERE ID = ?;
+            """, (id,)
+        )
+        self.conn.commit()
+        
 DatabaseDriver = singleton(DatabaseDriver)
