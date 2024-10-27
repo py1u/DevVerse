@@ -31,6 +31,10 @@ class DatabaseDriver(object):
             )
         except Exception as err:
             print(err)
+    
+    def delete_task_table(self):
+        self.conn.execute("DROP TABLE IF EXISTS task;")
 
+    
 
 DatabaseDriver = singleton(DatabaseDriver)
