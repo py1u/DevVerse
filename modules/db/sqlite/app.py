@@ -27,8 +27,20 @@ def create_task():
         return success_res(task, 201)
     return failure_res("something went wrong while creating task!")
 
-@app.route("/tasks/<int:task_id>")
+@app.route("/tasks/<int:task_id>/")
 def get_task(task_id):
+    task = DB.get_task_by_id(task_id)
+    if task is not None:
+        return success_res(task)
+    return failure_res("Task not found!")
+
+@app.route("tasks/<int:task_id>", methods=["POST"])
+def update_task(task_id):
+    body = json.loads(request.data)
+    description = body.get("description")
+    done = bool(body.get("done"))
+    DB.update_task_by_id(task_id, description, done)
+    
     task = DB.get_task_by_id(task_id)
     if task is not None:
         return success_res(task)
