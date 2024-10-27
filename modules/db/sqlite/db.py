@@ -47,5 +47,17 @@ class DatabaseDriver(object):
                 }
             )
         return tasks
+    
+    def insert_task_table(self, description, done):
+        try:
+            cur = self.conn.cursor()
+            cur.execute(
+                "INSERT INTO task (DESCRIPTION, DONE) VALUES (?,?);", (description, done)
+            )
+            self.conn.commit()
+            return cur.lastrowid
+        except Exception as err:
+            print(err)
+            return None
 
 DatabaseDriver = singleton(DatabaseDriver)
