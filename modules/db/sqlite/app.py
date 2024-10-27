@@ -2,12 +2,9 @@ from flask import Flask
 import json
 import db 
 
+DB = db.DatabaseDriver()
+
 app = Flask("__name__")
-
-@app.route("/")
-def hello():
-    return "Hello World!"
-
 
 def sucess_res(data, code=200):
     pass
