@@ -46,5 +46,14 @@ def update_task(task_id):
         return success_res(task)
     return failure_res("Task not found!")
 
+@app.route("/tasks/<int:task_id>/", methods=["DELETE"])
+def delete_task(task_id):
+    task = DB.get_task_by_id(task_id)
+    if task is not None:
+        DB.delete_task_by_id(task_id)
+        return success_res(task)
+    return failure_res("Task not found!")
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
