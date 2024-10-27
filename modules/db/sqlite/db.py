@@ -1,7 +1,6 @@
 import os
 import sqlite3
 
-# From: https://goo.gl/YzypOI
 def singleton(cls):
     instances = {}
 
@@ -9,20 +8,29 @@ def singleton(cls):
         if cls not in instances:
             instances[cls] = cls()
         return instances[cls]
-
     return getinstance
 
-
 class DatabaseDriver(object):
-    """
-    Database driver for the Task app.
-    Handles with reading and writing data with the database.
-    """
 
     def __init__(self):
-        pass
+        self.conn = sqlite3.connect(
+            "task.db", check_same_thread = False
+        )
+        self.create_task_table()
+        
+    def create_task_table(self):
+        try:
+            self.conn.execute(
+            """
+                CREATE TABLE task (
+                    ID INTEGER PRIMARY KEY,
+                    DESCRIPTION TEXT NOT NULL,
+                    DONE INTEGER NOT NULL        
+                );
+            """
+            )
+        except Exception as err:
+            print(err)
 
 
-# Only <=1 instance of the database driver
-# exists within the app at all times
 DatabaseDriver = singleton(DatabaseDriver)
