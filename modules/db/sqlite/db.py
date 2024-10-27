@@ -35,6 +35,17 @@ class DatabaseDriver(object):
     def delete_task_table(self):
         self.conn.execute("DROP TABLE IF EXISTS task;")
 
-    
+    def get_all_tasks(self):
+        cursor = self.conn.execute("SELECT * FROM task;")
+        tasks = []
+        for row in cursor:
+            tasks.append(
+                {
+                    "id": row[0],
+                    "description": row[1],
+                    "done": bool(row[2])
+                }
+            )
+        return tasks
 
 DatabaseDriver = singleton(DatabaseDriver)
