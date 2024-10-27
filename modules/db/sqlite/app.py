@@ -7,10 +7,10 @@ DB = db.DatabaseDriver()
 app = Flask("__name__")
 
 def sucess_res(data, code=200):
-    pass
+    return json.dumps({"success": True, "data": data}), code
 
 def failure_res(message, code=404):
-    pass
+    return json.dumps({"succes": False, "error": message}), code
 
 @app.route("/tasks/")
 def get_tasks():
