@@ -1,4 +1,7 @@
 from flask import Flask
+import db
+
+DB = db.DatabaseDriver()
 
 app = Flask("__main__")
 

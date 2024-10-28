@@ -16,9 +16,9 @@ class DatabaseDriver(object):
         self.conn = sqlite3.connect(
             "booking.db", check_same_thread = False
         )
-        self.create_task_table()
+        self.create_booking_table()
         
-    def create_task_table(self):
+    def create_booking_table(self):
         try:
             self.conn.execute(
             """
