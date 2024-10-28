@@ -6,7 +6,9 @@ def parse_row(row, columns):
         parsed_row[columns[item]] = row[item]
     return parsed_row
 
-# From: https://goo.gl/YzypOI
+def parse_cursor(cursor, columns):
+    return [parse_row(row, columns) for row in cursor]
+
 def singleton(cls):
     instances = {}
 
@@ -29,9 +31,10 @@ class DatabaseDriver(object):
         Secures a connection with the database and stores it into the
         instance variable `conn`
         """
-        self.conn = sqlite3.connect("todo.db", check_same_thread=False)
+        self.conn = sqlite3.connect("task.db", check_same_thread=False)
         self.create_task_table()
-
+        self.create_subtask_table()
+        
     # -- TASKS -----------------------------------------------------------
 
     def create_task_table(self):
