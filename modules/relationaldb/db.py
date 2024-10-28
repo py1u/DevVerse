@@ -1,5 +1,11 @@
 import sqlite3
 
+def parse_row(row, columns):
+    parsed_row = {}
+    for item in range(len(columns)):
+        parsed_row[columns[item]] = row[item]
+    return parsed_row
+
 # From: https://goo.gl/YzypOI
 def singleton(cls):
     instances = {}
