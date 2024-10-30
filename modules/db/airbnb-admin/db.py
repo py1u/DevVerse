@@ -40,6 +40,7 @@ class DatabaseDriver(object):
         
     def get_booking():
         cursor = self.conn.execute("SELECT * FROM booking;")
+        print(cursor)
         bookings = []
         for row in cursor:
             bookings.append(
@@ -51,6 +52,12 @@ class DatabaseDriver(object):
                 }
             )
         return bookings
-             
+    
+    def get_booking_by_id():
+        cursor = self.conn.execute("SELECT (name, address, rate, open) FROM booking WHERE id=?;", (id,))
+        for row in cursor:
+            return {"id": row[0], "description": row[1], "done": bool(row[2]) }
+        return None
+        
             
     
