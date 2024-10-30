@@ -38,7 +38,7 @@ class DatabaseDriver(object):
         print("booking table dropped!")
         
         
-    def get_booking():
+    def get_booking_table(self):
         cursor = self.conn.execute("SELECT * FROM booking;")
         print(cursor)
         bookings = []
