@@ -16,7 +16,6 @@ class DatabaseDriver(object):
         self.conn = sqlite3.connect(
             "booking.db", check_same_thread = False
         )
-        self.create_booking_table()
         
     def create_booking_table(self):
         try:
@@ -31,8 +30,27 @@ class DatabaseDriver(object):
                 )
             """
             )
-            
         except Exception as err:
-            print(err)
+            print(err)    
+            
+    def delete_booking_table(self):
+        self.conn.execute("DROP TABLE IF EXISTS booking")
+        print("booking table dropped!")
+        
+        
+    def get_booking():
+        cursor = self.conn.execute("SELECT * FROM booking;")
+        bookings = []
+        for row in cursor:
+            bookings.append(
+                {
+                    "name": row[0],
+                    "address": row[1],
+                    "rate": row[2],
+                    "open": row[3]
+                }
+            )
+        return bookings
+             
             
     
