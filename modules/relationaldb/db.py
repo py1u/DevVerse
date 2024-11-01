@@ -21,23 +21,13 @@ def singleton(cls):
 
 
 class DatabaseDriver(object):
-    """
-    Database driver for the Task app.
-    Handles with reading and writing data with the database.
-    """
-
+ 
     def __init__(self):
-        """
-        Secures a connection with the database and stores it into the
-        instance variable `conn`
-        """
         self.conn = sqlite3.connect("task.db", check_same_thread=False)
-        self.conn.execute("PRAGMA foreign keys = 1")
+        self.conn.execute("PRAGMA foreign_keys = 1")
         self.create_task_table()
         self.create_subtask_table()
         
-    # -- TASKS -----------------------------------------------------------
-
     def create_task_table(self):
         """
         Using SQL, creates a task table
@@ -96,4 +86,27 @@ class DatabaseDriver(object):
         )
         self.conn.commit()
 
+    def create_subtask_table(self):
+        try:
+            self.conn.execute(
+                """
+                    CREATE TABLE subtask (
+                        id INTEGER PRIMARY KEY,
+                        description TEXT NOT NULL,
+                        done INTEGER NOT NULL,
+                        task_id INTEGER NOT NULL,
+                        FOREIGN KEY (task_id) REFERENCES task(id)
+                    );
+                """
+            )
+            
+        except Exception as err:
+            print(err)
+
+    def get_all_subtasks(self):
+        cursor = self.conn.execute("SELECT * FROM subtask;")
+        subtasks = parse_cursor(
+            cursor, ["id", "description", "done", "task_id"]
+        )
+        
 DatabaseDriver = singleton(DatabaseDriver)
