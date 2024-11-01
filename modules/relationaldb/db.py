@@ -48,6 +48,8 @@ class DatabaseDriver(object):
 
     def get_all_tasks(self):
         cursor = self.conn.execute("SELECT * FROM tasks;")
+        # for row in cursor:
+        #     print(row)
         tasks = parse_cursor(cursor, ["id", "description", "done"])        
         return tasks
 
