@@ -81,7 +81,12 @@ def create_subtask(task_id):
 def get_all_subtasks():
     return success_response({ "subtasks" : DB.get_all_subtasks()}) 
 
-
+@app.route("/tasks/<int:task_id>/subtasks/")
+def get_subtasks_of_task(task_id): 
+    tasks = DB.get_task_by_id(task_id)
+    if tasks is None:
+        return failure_response("task not found!")
+    return success_response(DB.get_subtasks_of_task(task_id)) 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
