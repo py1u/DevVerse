@@ -122,6 +122,9 @@ class DatabaseDriver(object):
             return parse_row(row, ["id", "description", "done", "task_id"])
         return None
     
-    
+    def get_subtasks_of_task(self, task_id):
+        cursor = self.conn.execute("SELECT * FROM subtask WHERE task_id = ?;", (task_id,))
+        subtasks = parse_cursor(cursor,["id", "description", "done"])
+        return subtasks  
       
 DatabaseDriver = singleton(DatabaseDriver)
