@@ -107,5 +107,13 @@ class DatabaseDriver(object):
             cursor, ["id", "description", "done", "task_id"]
         )
         return subtasks        
-        
+  
+    def insert_subtask(self, description, done, task_id):
+        cursor = self.conn.cursor()
+        cursor.execute(
+            "INSERT INTO subtask (description, done, task_id) VALUES (?,?,?)", (description, done, task_id)
+        )
+        self.conn.commit()
+        return cursor.lastrowid  
+      
 DatabaseDriver = singleton(DatabaseDriver)
