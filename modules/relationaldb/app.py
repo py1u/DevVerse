@@ -77,7 +77,9 @@ def create_subtask(task_id):
     return success_response(subtask)
 
     
-
+@app.route("/subtasks/")
+def get_all_subtasks():
+    return success_response({ "subtasks" : DB.get_all_subtasks()}) 
 
 
 
