@@ -100,5 +100,12 @@ class DatabaseDriver(object):
             
         except Exception as err:
             print(err)
+
+    def get_all_subtasks(self):
+        cursor = self.conn.execute("SELECT * FROM subtask;")
+        subtasks = parse_cursor(
+            cursor, ["id", "description", "done", "task_id"]
+        )
+        return subtasks        
         
 DatabaseDriver = singleton(DatabaseDriver)
