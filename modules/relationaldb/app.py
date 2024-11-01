@@ -6,7 +6,6 @@ DB = db.DatabaseDriver()
 
 app = Flask(__name__)
 
-# generalized response formats
 def success_response(body, code=200):
     return json.dumps(body), code
 
@@ -70,6 +69,10 @@ def delete_task(task_id):
         return failure_response("Task not found!")
     DB.delete_task_by_id(task_id)
     return success_response(task)
+
+@app.route("/subtasks/"):
+    def get_all_subtasks():
+        return success_response(DB.get_all_subtasks()) 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
