@@ -29,9 +29,7 @@ class DatabaseDriver(object):
         self.create_subtask_table()
         
     def create_task_table(self):
-        """
-        Using SQL, creates a task table
-        """
+
         try:
             self.conn.execute(
                 """
@@ -95,18 +93,12 @@ class DatabaseDriver(object):
                         description TEXT NOT NULL,
                         done INTEGER NOT NULL,
                         task_id INTEGER NOT NULL,
-                        FOREIGN KEY (task_id) REFERENCES task(id)
+                        FOREIGN KEY (task_id) REFERENCES tasks(id)
                     );
                 """
             )
             
         except Exception as err:
             print(err)
-
-    def get_all_subtasks(self):
-        cursor = self.conn.execute("SELECT * FROM subtask;")
-        subtasks = parse_cursor(
-            cursor, ["id", "description", "done", "task_id"]
-        )
         
 DatabaseDriver = singleton(DatabaseDriver)
