@@ -114,6 +114,14 @@ class DatabaseDriver(object):
             "INSERT INTO subtask (description, done, task_id) VALUES (?,?,?)", (description, done, task_id)
         )
         self.conn.commit()
-        return cursor.lastrowid  
+        return cursor.lastrowid
+
+    def get_subtask_by_id(self, subtask_id):
+        cursor = self.conn.execute("SELECT * FROM subtask WHERE ID = ?;",(subtask_id,))
+        for row in cursor:
+            return parse_row(row, ["id", "description", "done", "task_id"])
+        return None
+    
+    
       
 DatabaseDriver = singleton(DatabaseDriver)
