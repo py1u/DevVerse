@@ -12,10 +12,10 @@ def singleton(cls):
 
 class DatabaseDriver(object):
 
-    def __init__(self):
-        self.conn = sqlite3.connect(
-            "task.db", check_same_thread = False
-        )
+        def __init__(self):
+            self.conn = sqlite3.connect(
+                "task.db", check_same_thread = False
+            )
         self.create_task_table()
         
     def create_task_table(self):
