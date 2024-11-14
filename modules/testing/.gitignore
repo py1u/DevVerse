@@ -1,0 +1,10 @@
+#pytest
+.pytest_cache
+
+#virtual environment
+.venv
+
+#flask cache
+tests/__pycache__/
+src/__pycache__/
+
