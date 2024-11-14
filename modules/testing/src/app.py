@@ -50,8 +50,12 @@ def handle_job_description(role, job_id):
     return client_failure_res("Job not found!")
     
   if request.method == "GET":
-    return jsonify({"job_id": job_id,"title": jobs_update[role].get("title")}), 200
-  
+    return jsonify({"job_id": job_id,
+                       "title": jobs_update[role].get("title"), 
+                       "description": jobs_update[role].get("desc"), 
+                       "available": jobs_update[role].get("available"), 
+                       "date": jobs_update[role].get("date")
+                       }), 200
   
   elif request.method == "PUT":
     data = request.get_json()
