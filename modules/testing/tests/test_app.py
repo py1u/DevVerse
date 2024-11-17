@@ -89,5 +89,3 @@ def test_delete_job(client, role, job_id):
   response = client.get(f"/api/engineering/{role}/{job_id}")
   assert response.status_code == 404
   
-  
-    
