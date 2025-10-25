@@ -41,8 +41,14 @@ def update_task(task_id):
     if not task:
         return failure_res("Task not found!")
     body = json.loads(request.data)
-    description = body.
-
+    description = body.get("description")
+    done = bool(body.get("done"))
+    
+    DB.update_task_by_id(task_id, description, done)
+    task = DB.get_task_by_id(task_id)
+    if task is not None:
+        return success_res(task)
+    return failure_res("Task not found!")
 
 @app.route("/tasks/<int:task_id>/", methods=["DELETE"])
 def delete_task(task_id):
